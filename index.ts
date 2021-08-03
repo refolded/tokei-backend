@@ -42,7 +42,7 @@ const main = async () => {
   });
 };
 
-// Start the express app
+// Call the main function
 main().catch((err) => {
   /* eslint-disable-next-line no-console */
   console.log("Error: ", err);
