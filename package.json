@@ -1,0 +1,14 @@
+{
+  "name": "tokei-backend",
+  "version": "0.1.0",
+  "description": "Backend component for Tokei",
+  "main": "index.js",
+  "repository": "https://github.com/refolded/tokei-backend",
+  "author": "@refolded",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "husky": "^7.0.1"
+  }
+}
