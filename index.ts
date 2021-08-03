@@ -37,11 +37,13 @@ const main = async () => {
   apollo.applyMiddleware({ app });
   // Start the express app
   app.listen(PORT, () => {
+    /* eslint-disable-next-line no-console */
     console.log(`Server started on port ${PORT}`);
   });
 };
 
 // Start the express app
 main().catch((err) => {
+  /* eslint-disable-next-line no-console */
   console.log("Error: ", err);
 });
