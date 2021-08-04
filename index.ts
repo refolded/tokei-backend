@@ -1,26 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
-import { ApolloServer, gql } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-express";
+import typeDefs from "./graphql/typedefs";
+import resolvers from "./graphql/resolvers";
 
 // Initialize environment variables
 dotenv.config();
 
 // Extract the port from environment
 const { PORT } = process.env;
-
-// Define an example type for GQL
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-// Define resolvers for the typeDefs
-const resolvers = {
-  Query: {
-    hello: () => "Hello world!",
-  },
-};
 
 // Create an express app to serve the GraphQL API
 const main = async () => {
@@ -38,7 +26,7 @@ const main = async () => {
   // Start the express app
   app.listen(PORT, () => {
     /* eslint-disable-next-line no-console */
-    console.log(`Server started on port ${PORT}`);
+    console.log(`🚀 Apollo is ready on port: ${PORT}`);
   });
 };
 
