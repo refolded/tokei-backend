@@ -9,3 +9,67 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model User {
+  id              String             @id @default(uuid())
+  email           String             @unique
+  name            String
+  password        String
+  adminWorkspaces AdminInWorkspace[]
+  workspaces      Workspace[]
+  Project         Project[]          @relation(references: [id])
+}
+
+model Workspace {
+  id             String             @id @default(uuid())
+  type           String
+  projects       Project[]
+  administrators AdminInWorkspace[]
+  users          User[]
+}
+
+model AdminInWorkspace {
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspaceId String
+
+  @@id([userId, workspaceId])
+}
+
+model Project {
+  id          String    @id @default(uuid())
+  name        String
+  description String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  users       User[]
+  items       Item[]
+  workspaceId String
+}
+
+model Item {
+  id                   String             @id @default(uuid())
+  title                String
+  description          String
+  project              Project[]
+  properties           PropertyCollection @relation(fields: [propertyCollectionId], references: [id])
+  blocks               Block[]
+  subItems             Item[]             @relation("ItemToItem")
+  Item                 Item?              @relation("ItemToItem", fields: [itemId], references: [id])
+  itemId               String?
+  propertyCollectionId String
+}
+
+model PropertyCollection {
+  id    String @id @default(uuid())
+  value Json?
+  Item  Item[]
+}
+
+model Block {
+  id      String @id @default(uuid())
+  content Json?
+  Item    Item   @relation(fields: [itemId], references: [id])
+  itemId  String
+  type    String
+}
