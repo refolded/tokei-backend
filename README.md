@@ -17,7 +17,7 @@ yarn
 
 -make a file called .env
 -copy from .env.example to .env
--change DATABASE_URL with the URL found in ( notion > workspace > assets > credentials )
+-make sure DATABASE_URL is set to the correct URL 
 
 ```bash
 yarn prisma generate
