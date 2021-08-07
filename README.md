@@ -1,28 +1,31 @@
 # tokei-backend
 
-A web based application for task management, Collaboration, and managing projects.
+A web based application for task management, collaboration, and managing projects.
 
 ## Installation
 
 ```bash
-  git clone https://github.com/refolded/tokei-backend.git
-```
-
-### Running tokei-backend
-
-```bash
+git clone https://github.com/refolded/tokei-backend.git
 cd tokei-backend
 yarn
 ```
 
--make a file called .env
--copy from .env.example to .env
--make sure DATABASE_URL is set to the correct URL 
+### Run locally
+
+- Make a file called .env
+- Copy from .env.example to .env
+- Make sure DATABASE_URL is set to the correct URL 
+
+#### Run the server
 
 ```bash
-yarn prisma generate
-yarn studio (optional)
 yarn dev
+```
+
+#### Browse the database
+
+```bash
+yarn prisma studio
 ```
 
 ## Tech Stack
