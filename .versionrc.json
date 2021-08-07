@@ -1,0 +1,14 @@
+{
+  "types": [
+    { "type": "feat", "section": "Changes" },
+    { "type": "fix", "section": "Bug Fixes" },
+    { "type": "chore", "hidden": true },
+    { "type": "docs", "hidden": true },
+    { "type": "style", "hidden": true },
+    { "type": "refactor", "section": "Changes" },
+    { "type": "perf", "section": "Changes" },
+    { "type": "test", "section": "Changes" }
+  ],
+  "commitUrlFormat": "https://github.com/refolded/tokei-backend/commits/{{hash}}",
+  "compareUrlFormat": "https://github.com/refolded/tokei-backend/compare/{{previousTag}}...{{currentTag}}"
+}
