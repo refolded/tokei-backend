@@ -29,6 +29,9 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@graphql-tools/load-files": "^6.3.2",
+    "@graphql-tools/merge": "^7.0.0",
+    "@graphql-tools/schema": "^8.0.3",
     "@prisma/client": "2.28.0",
     "apollo-server-express": "^3.1.2",
     "dotenv": "^10.0.0",
