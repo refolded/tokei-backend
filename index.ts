@@ -1,9 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import { ApolloServer } from "apollo-server-express";
-import typeDefs from "./graphql/typedefs";
-import resolvers from "./graphql/resolvers";
 
+import schema from "./graphql/schema";
 // Initialize environment variables
 dotenv.config();
 
@@ -16,8 +15,7 @@ const main = async () => {
   const app = express();
   // Create an apollo server
   const apollo = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
   });
   // Serve the GraphQL API on the /graphql path
   await apollo.start();

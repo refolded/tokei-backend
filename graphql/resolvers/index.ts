@@ -1,7 +1,5 @@
-const resolvers = {
+export default {
   Query: {
     hello: () => "Hello world!",
   },
 };
-
-export default resolvers;
