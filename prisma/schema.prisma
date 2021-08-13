@@ -1,13 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -15,72 +12,71 @@ model User {
   email           String             @unique
   name            String
   password        String
-  adminWorkspaces AdminInWorkspace[]
   adminProjects   AdminInProject[]
+  adminWorkspaces AdminInWorkspace[]
+  Project         Project[]
   workspaces      Workspace[]
-  projects        Project[]          @relation(references: [id])
 }
 
 model Workspace {
   id             String             @id @default(uuid())
   type           String
-  projects       Project[]
   administrators AdminInWorkspace[]
+  projects       Project[]
   users          User[]
 }
 
 model AdminInWorkspace {
-  user        User      @relation(fields: [userId], references: [id])
   userId      String
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
   workspaceId String
+  user        User      @relation(fields: [userId], references: [id])
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
 
   @@id([userId, workspaceId])
 }
 
 model Project {
-  id          String    @id @default(uuid())
-  name        String
-  description String
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  users       User[]
-  items       Item[]
-  workspaceId String
+  id             String           @id @default(uuid())
+  name           String
+  description    String
+  workspaceId    String
+  workspace      Workspace        @relation(fields: [workspaceId], references: [id])
   administrators AdminInProject[]
+  items          Item[]
+  User           User[]
 }
 
 model AdminInProject {
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
-  project   Project @relation(fields: [projectId], references: [id])
+  userId    String
   projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
 
   @@id([userId, projectId])
 }
 
 model Item {
-  id                   String             @id @default(uuid())
-  title                String
-  description          String
-  project              Project[]
-  properties           PropertyCollection @relation(fields: [propertyCollectionId], references: [id])
-  blocks               Block[]
-  subItems             Item[]             @relation("ItemToItem")
-  Item                 Item?              @relation("ItemToItem", fields: [itemId], references: [id])
-  itemId               String?
-  propertyCollectionId String
-}
-
-model PropertyCollection {
-  id    String @id @default(uuid())
-  value Json?
-  Item  Item[]
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  itemId      String?
+  Item        Item?      @relation("ItemToItem", fields: [itemId], references: [id])
+  blocks      Block[]
+  subItems    Item[]     @relation("ItemToItem")
+  project     Project[]
+  Property    Property[]
 }
 
 model Block {
   id      String @id @default(uuid())
   content Json?
-  Item    Item   @relation(fields: [itemId], references: [id])
   itemId  String
   type    String
+  Item    Item   @relation(fields: [itemId], references: [id])
+}
+
+model Property {
+  id    String @id
+  value Json?
+  Item  Item[]
 }
