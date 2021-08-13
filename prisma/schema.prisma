@@ -43,7 +43,7 @@ model Project {
   workspace      Workspace        @relation(fields: [workspaceId], references: [id])
   administrators AdminInProject[]
   items          Item[]
-  User           User[]
+  Users          User[]
 }
 
 model AdminInProject {
@@ -63,8 +63,8 @@ model Item {
   Item        Item?      @relation("ItemToItem", fields: [itemId], references: [id])
   blocks      Block[]
   subItems    Item[]     @relation("ItemToItem")
-  project     Project[]
-  Property    Property[]
+  projects    Project[]
+  properties  Property[]
 }
 
 model Block {
