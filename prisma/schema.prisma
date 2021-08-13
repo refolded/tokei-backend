@@ -14,7 +14,7 @@ model User {
   password        String
   adminProjects   AdminInProject[]
   adminWorkspaces AdminInWorkspace[]
-  Project         Project[]
+  projects         Project[]
   workspaces      Workspace[]
 }
 
@@ -60,7 +60,7 @@ model Item {
   title       String
   description String
   itemId      String?
-  Item        Item?      @relation("ItemToItem", fields: [itemId], references: [id])
+  item        Item?      @relation("ItemToItem", fields: [itemId], references: [id])
   blocks      Block[]
   subItems    Item[]     @relation("ItemToItem")
   projects    Project[]
