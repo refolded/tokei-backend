@@ -21,6 +21,7 @@ model User {
 model Workspace {
   id             String             @id @default(uuid())
   type           String
+  name           String
   administrators AdminInWorkspace[]
   projects       Project[]
   users          User[]
@@ -43,7 +44,7 @@ model Project {
   workspace      Workspace        @relation(fields: [workspaceId], references: [id])
   administrators AdminInProject[]
   items          Item[]
-  Users          User[]
+  users          User[]
 }
 
 model AdminInProject {
