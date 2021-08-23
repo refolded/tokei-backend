@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-import { Workspace } from '../../types/types'
+import { PrismaClient } from "@prisma/client";
+import { Workspace } from "../../types/types";
 
 const prisma = new PrismaClient();
 
@@ -9,20 +9,22 @@ export default {
     getWorkspaceById: (_: any, { id }: { id: any }) =>
       prisma.workspace.findUnique({
         where: {
-          id: String(id)
-        }
+          id: String(id),
+        },
       }),
   },
   Mutation: {
-    createWorkspace: (_parent:any,args: {createdWorkspace:{type: string, name: string} }) => {
+    createWorkspace: (
+      _parent: any,
+      args: { createdWorkspace: { type: string; name: string } }
+    ) => {
       const workspace = prisma.workspace.create({
-         data: {
+        data: {
           type: args.createdWorkspace.type,
-          name: args.createdWorkspace.name
-         } 
-        });
+          name: args.createdWorkspace.name,
+        },
+      });
       return workspace;
     },
-
-  }
+  },
 };
