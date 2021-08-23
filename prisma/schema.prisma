@@ -56,8 +56,8 @@ model Project {
 model AdminInProject {
   userId    String
   projectId String
-  project   Project @relation(fields: [projectId], references: [id])
-  user      User    @relation(fields: [userId], references: [id])
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, projectId])
 }
@@ -79,7 +79,7 @@ model Block {
   content Json?
   itemId  String
   type    String
-  Item    Item   @relation(fields: [itemId], references: [id])
+  Item    Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
 }
 
 model Property {
