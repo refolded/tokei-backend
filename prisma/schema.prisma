@@ -1,5 +1,11 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions"]
+
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
 }
 
 datasource db {
@@ -14,7 +20,7 @@ model User {
   password        String
   adminProjects   AdminInProject[]
   adminWorkspaces AdminInWorkspace[]
-  projects         Project[]
+  projects        Project[]
   workspaces      Workspace[]
 }
 
@@ -30,8 +36,8 @@ model Workspace {
 model AdminInWorkspace {
   userId      String
   workspaceId String
-  user        User      @relation(fields: [userId], references: [id])
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
   @@id([userId, workspaceId])
 }
@@ -41,7 +47,7 @@ model Project {
   name           String
   description    String
   workspaceId    String
-  workspace      Workspace        @relation(fields: [workspaceId], references: [id])
+  workspace      Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   administrators AdminInProject[]
   items          Item[]
   users          User[]
@@ -61,7 +67,7 @@ model Item {
   title       String
   description String
   itemId      String?
-  item        Item?      @relation("ItemToItem", fields: [itemId], references: [id])
+  item        Item?      @relation("ItemToItem", fields: [itemId], references: [id], onDelete: Cascade)
   blocks      Block[]
   subItems    Item[]     @relation("ItemToItem")
   projects    Project[]
@@ -77,7 +83,8 @@ model Block {
 }
 
 model Property {
-  id    String @id
-  value Json?
-  Item  Item[]
+  id     String @id
+  value  Json?
+  itemId String
+  item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
 }
