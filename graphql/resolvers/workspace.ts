@@ -6,10 +6,10 @@ const prisma = new PrismaClient();
 export default {
   Query: {
     allWorkspaces: () => prisma.workspace.findMany(),
-    getWorkspaceById: (_: any, { id }: { id: any }) =>
+    getWorkspaceById: (_parent: any, args: { getWorkspace: { id: any } }) =>
       prisma.workspace.findUnique({
         where: {
-          id: String(id),
+          id: String(args.getWorkspace.id),
         },
       }),
   },
@@ -22,6 +22,14 @@ export default {
         data: {
           type: args.createdWorkspace.type,
           name: args.createdWorkspace.name,
+        },
+      });
+      return workspace;
+    },
+    deleteWorkspaceById: (_parent: any, args: { id: string }) => {
+      const workspace = prisma.workspace.delete({
+        where: {
+          id: String(args.id),
         },
       });
       return workspace;
