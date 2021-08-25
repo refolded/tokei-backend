@@ -21,7 +21,6 @@ const addItems = async () => {
       },
     },
   });
-  console.log("🚀 ~ file: AddItem.ts ~ line 24 ~ addItems ~ item", item);
 };
 
 export default addItems;
