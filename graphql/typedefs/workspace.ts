@@ -19,7 +19,7 @@ export default gql`
     # users: [User]
   }
   type Query {
-    allWorkspaces: [Workspace]!
+    getAllWorkspaces: [Workspace]!
     getWorkspaceById(id: String!): Workspace
   }
 

@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export default {
   Query: {
-    allWorkspaces: () => prisma.workspace.findMany(),
+    getAllWorkspaces: () => prisma.workspace.findMany(),
     getWorkspaceById: (_parent: any, args: { getWorkspace: { id: any } }) =>
       prisma.workspace.findUnique({
         where: {
