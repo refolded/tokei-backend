@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { Workspace } from "../../types/types";
 
 const prisma = new PrismaClient();
 
@@ -22,6 +21,21 @@ export default {
         data: {
           type: args.createdWorkspace.type,
           name: args.createdWorkspace.name,
+        },
+      });
+      return workspace;
+    },
+    updateWorkspaceById: (
+      _parent: any,
+      args: { updatedWorkspace: { id: string; type: string; name: string } }
+    ) => {
+      const workspace = prisma.workspace.update({
+        where: {
+          id: args.updatedWorkspace.id,
+        },
+        data: {
+          name: args.updatedWorkspace.name,
+          type: args.updatedWorkspace.type,
         },
       });
       return workspace;
