@@ -106,3 +106,5 @@ dist
 # Build output
 build
 dist
+
+prisma/dbml
