@@ -29,7 +29,7 @@
   "scripts": {
     "prisma:init": "prisma generate",
     "husky:init": "husky install",
-    "prepare": "run-p -c '*:init'",
+    "prepare": "run-p -c prisma:init husky:init",
     "dev": "ts-node-dev --respawn index.ts",
     "build": "tsc"
   },
