@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { IdleTransaction } from "@sentry/tracing";
 
 const prisma = new PrismaClient();
 
@@ -12,5 +11,14 @@ export default {
         },
       }),
   },
-  // Mutation: {},
+  Mutation: {
+    createProperty: (_parent: any, args: { itemId: any }) => {
+      const property = prisma.property.create({
+        data: {
+          itemId: args.itemId,
+        },
+      });
+      return property;
+    },
+  },
 };
