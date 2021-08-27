@@ -16,7 +16,7 @@ export default gql`
 
   type Mutation {
     createProperty(itemId: String!): Property
-    updateProperty(propertyId: String!, newObject: JSON!): Property
-    deleteProperty(propertyId: String!): Property
+    updateProperty(id: String!, value: JSON!): Property
+    deleteProperty(id: String!): Property
   }
 `;
