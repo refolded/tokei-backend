@@ -83,7 +83,7 @@ model Block {
 }
 
 model Property {
-  id     String @id
+  id     String @id @default(uuid())
   value  Json?
   itemId String
   item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
