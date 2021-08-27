@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   scalar JSON
-  
+
   type Property {
     id: String
     value: JSON
@@ -10,13 +10,11 @@ export default gql`
     #item: Item
   }
 
-  
-
   type Query {
-
+    getAllItemProperties(itemId: String!): [Property]!
   }
 
-  type Mutation {
+  # type Mutation {
 
-  }
+  # }
 `;
