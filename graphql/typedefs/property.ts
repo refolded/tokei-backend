@@ -14,7 +14,9 @@ export default gql`
     getAllItemProperties(itemId: String!): [Property]!
   }
 
-  # type Mutation {
-
-  # }
+  type Mutation {
+    createProperty(itemId: String!): Property
+    updateProperty(propertyId: String!, newObject: JSON!): Property
+    deleteProperty(propertyId: String!): Property
+  }
 `;
