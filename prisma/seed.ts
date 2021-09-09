@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { PrismaClient } from "@prisma/client";
 import addUser from "./seed/AddUser";
 import addItems from "./seed/AddItem";
@@ -7,6 +8,8 @@ import addWorkspace from "./seed/AddWorkspace";
 const prisma = new PrismaClient();
 
 async function main() {
+  console.log("Deleting existing entries...");
+
   await prisma.item.deleteMany({});
   await prisma.project.deleteMany({});
   await prisma.workspace.deleteMany({});
@@ -17,32 +20,36 @@ async function main() {
   const workspacePromises = [];
   const itemsPromises = [];
 
+  console.log("Creating Users...");
   for (let index = 0; index < 10; index += 1) {
     userPromises.push(addUser());
   }
-  const users = await Promise.all(userPromises);
+  await Promise.all(userPromises);
 
+  console.log("Creating Workspaces...");
   for (let index = 0; index < 10; index += 1) {
     workspacePromises.push(addWorkspace());
   }
-  const workspace = await Promise.all(workspacePromises);
+  await Promise.all(workspacePromises);
 
+  console.log("Creating Projects...");
   for (let index = 0; index < 10; index += 1) {
     projectPromises.push(addProject());
   }
-  const project = await Promise.all(projectPromises);
+  await Promise.all(projectPromises);
 
+  console.log("Creating Items...");
   for (let index = 0; index < 10; index += 1) {
     itemsPromises.push(addItems());
   }
-  const items = await Promise.all(itemsPromises);
+  await Promise.all(itemsPromises);
 }
 
 main()
+  .then(() => {
+    console.log("Seeding complete. Run prisma studio to validate.");
+    prisma.$disconnect();
+  })
   .catch((e) => {
     process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-    process.exit();
   });

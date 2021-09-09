@@ -39,16 +39,13 @@ const addProject = async () => {
         users: {
           connect: randomWorkspaceUsers.users.map((c) => ({ id: c.id })),
         },
+        administrators: {
+          connect: {
+            id: randomUserAdmin.id,
+          },
+        },
       },
     });
-    if (randomUserAdmin) {
-      const adminInProject = await prisma.adminInProject.create({
-        data: {
-          userId: randomUserAdmin.id,
-          projectId: project.id,
-        },
-      });
-    }
   }
 };
 
