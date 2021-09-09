@@ -21,12 +21,9 @@ const addWorkspace = async () => {
       users: {
         connect: WorkspaceUsers.map((c) => ({ id: c.id })),
       },
-    },
-  });
-  const adminInWorkspace = await prisma.adminInWorkspace.create({
-    data: {
-      userId: randomUserAdmin.id,
-      workspaceId: workspace.id,
+      administrators: {
+        connect: { id: randomUserAdmin.id },
+      },
     },
   });
 };
