@@ -1,6 +1,5 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["referentialActions"]
 
 }
 
@@ -18,8 +17,8 @@ model User {
   email           String             @unique
   name            String
   password        String
-  adminProjects   AdminInProject[]
-  adminWorkspaces AdminInWorkspace[]
+  adminProjects   Project[]          @relation("AdminInProject")
+  adminWorkspaces Workspace[]        @relation("AdminInWorkspace")
   projects        Project[]
   workspaces      Workspace[]
 }
@@ -28,18 +27,9 @@ model Workspace {
   id             String             @id @default(uuid())
   type           String
   name           String
-  administrators AdminInWorkspace[]
+  administrators User[]             @relation("AdminInWorkspace")
   projects       Project[]
   users          User[]
-}
-
-model AdminInWorkspace {
-  userId      String
-  workspaceId String
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-
-  @@id([userId, workspaceId])
 }
 
 model Project {
@@ -48,18 +38,9 @@ model Project {
   description    String
   workspaceId    String
   workspace      Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  administrators AdminInProject[]
+  administrators User[]           @relation("AdminInProject")
   items          Item[]
   users          User[]
-}
-
-model AdminInProject {
-  userId    String
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([userId, projectId])
 }
 
 model Item {
@@ -79,12 +60,12 @@ model Block {
   content Json?
   itemId  String
   type    String
-  Item    Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  Item    Item   @relation(fields: [itemId], references: [id])
 }
 
 model Property {
   id     String @id @default(uuid())
   value  Json?
   itemId String
-  item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  item   Item   @relation(fields: [itemId], references: [id])
 }
