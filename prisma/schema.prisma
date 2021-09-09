@@ -64,9 +64,9 @@ model AdminInProject {
 
 model Item {
   id          String     @id @default(uuid())
-  title       String
-  description String
-  itemId      String?
+  title       String?     @default("")
+  description String?     @default("")
+  itemId      String?     
   item        Item?      @relation("ItemToItem", fields: [itemId], references: [id], onDelete: Cascade)
   blocks      Block[]
   subItems    Item[]     @relation("ItemToItem")

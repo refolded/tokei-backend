@@ -44,7 +44,7 @@ const main = async () => {
   // Start the express app
   app.listen(PORT, () => {
     /* eslint-disable-next-line no-console */
-    console.log(`🚀 Apollo is ready on port: ${PORT}`);
+    console.log(`🚀 Apollo is ready on: http://localhost:${PORT}/graphql`);
   });
 };
 
