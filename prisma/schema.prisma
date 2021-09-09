@@ -67,5 +67,5 @@ model Property {
   id     String @id @default(uuid())
   value  Json?
   itemId String
-  item   Item   @relation(fields: [itemId], references: [id])
+  item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
 }
