@@ -17,8 +17,13 @@ export default gql`
   }
 
   type Mutation {
-    createWorkspace(type: String, name: String): Workspace
-    updateWorkspaceById(id: String, type: String, name: String): Workspace
+    createWorkspace(type: String, name: String, userId: String): Workspace
+    updateWorkspaceById(
+      id: String
+      type: String
+      name: String
+      adminId: String
+    ): Workspace
     deleteWorkspaceById(id: String!): Workspace
   }
 `;
