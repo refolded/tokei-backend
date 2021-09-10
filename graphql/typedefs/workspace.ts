@@ -6,26 +6,19 @@ export default gql`
     id: String!
     type: String!
     name: String!
-    # projects: [Project]
-    # administrators: [AdminInWorkspace]
+    projects: [Project]
+    # administrators: [User]
     # users: [User]
   }
-  input WorkspaceInput {
-    id: String
-    type: String!
-    name: String!
-    # projects: [Project]
-    # administrators: [AdminInWorkspace]
-    # users: [User]
-  }
+
   type Query {
     getAllWorkspaces: [Workspace]!
     getWorkspaceById(id: String!): Workspace
   }
 
   type Mutation {
-    createWorkspace(createdWorkspace: WorkspaceInput): Workspace
-    updateWorkspaceById(updatedWorkspace: WorkspaceInput): Workspace
+    createWorkspace(type: String, name: String): Workspace
+    updateWorkspaceById(id: String, type: String, name: String): Workspace
     deleteWorkspaceById(id: String!): Workspace
   }
 `;
