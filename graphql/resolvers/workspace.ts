@@ -5,37 +5,51 @@ const prisma = new PrismaClient();
 export default {
   Query: {
     getAllWorkspaces: () => prisma.workspace.findMany(),
-    getWorkspaceById: (_parent: any, args: { getWorkspace: { id: any } }) =>
+
+    getWorkspaceById: (_parent: any, args: { id: any }) =>
       prisma.workspace.findUnique({
         where: {
-          id: String(args.getWorkspace.id),
+          id: String(args.id),
+        },
+        include: {
+          projects: true,
         },
       }),
   },
   Mutation: {
     createWorkspace: (
       _parent: any,
-      args: { createdWorkspace: { type: string; name: string } }
+      args: { type: string; name: string; userId: string }
     ) => {
       const workspace = prisma.workspace.create({
         data: {
-          type: args.createdWorkspace.type,
-          name: args.createdWorkspace.name,
+          type: args.type,
+          name: args.name,
+          administrators: {
+            connect: {
+              id: args.userId,
+            },
+          },
+          users: {
+            connect: {
+              id: args.userId,
+            },
+          },
         },
       });
       return workspace;
     },
     updateWorkspaceById: (
       _parent: any,
-      args: { updatedWorkspace: { id: string; type: string; name: string } }
+      args: { id: string; type: string; name: string; adminId: string }
     ) => {
       const workspace = prisma.workspace.update({
         where: {
-          id: args.updatedWorkspace.id,
+          id: args.id,
         },
         data: {
-          name: args.updatedWorkspace.name,
-          type: args.updatedWorkspace.type,
+          name: args.name,
+          type: args.type,
         },
       });
       return workspace;

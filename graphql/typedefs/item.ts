@@ -14,7 +14,7 @@ export default gql`
   }
 
   type Query {
-    getItemByID(itemId: String!): Item
+    getItemById(itemId: String!): Item
   }
 
   type Mutation {

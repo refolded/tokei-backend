@@ -1,11 +1,10 @@
 import { PrismaClient } from ".prisma/client";
-import { Property } from "../../types/types";
 
 const prisma = new PrismaClient();
 
 export default {
   Query: {
-    getItemByID: (_parent: any, args: { itemId: any }) =>
+    getItemById: (_parent: any, args: { itemId: string }) =>
       prisma.item.findUnique({
         where: {
           id: args.itemId,
@@ -13,6 +12,7 @@ export default {
         include: {
           item: true,
           subItems: true,
+          properties: true,
         },
       }),
   },
