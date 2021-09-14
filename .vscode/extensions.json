@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "vivaxy.vscode-conventional-commits",
+    "coenraads.bracket-pair-colorizer-2",
+    "streetsidesoftware.code-spell-checker",
+    "apollographql.vscode-apollo",
+    "mikestead.dotenv",
+    "christian-kohler.npm-intellisense",
+    "prisma.prisma"
+  ]
+}
