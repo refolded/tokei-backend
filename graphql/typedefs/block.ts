@@ -16,7 +16,7 @@ export default gql`
 
   type Mutation {
     createBlock(itemId: String, type: String): Block
-    updateBlock(content: JSON, itemId: String, type: String): Block
+    updateBlock(content: JSON, type: String): Block
     deleteBlock(id: String): Block
   }
 `;
