@@ -11,11 +11,11 @@ export default gql`
   }
 
   type Query {
-    getBlockById(id: String!): Block 
+    getBlockById(id: String!): Block
   }
 
   type Mutation {
-    createBlock(content: JSON, itemId: String, type: String): Block
+    createBlock(itemId: String, type: String): Block
     updateBlock(content: JSON, itemId: String, type: String): Block
     deleteBlock(id: String): Block
   }
