@@ -39,5 +39,13 @@ export default {
       });
       return block;
     },
+    deleteBlockById: (_parent: any, args: { id: string }) => {
+      const block = prisma.block.delete({
+        where: {
+          id: args.id,
+        },
+      });
+      return block;
+    },
   },
 };
