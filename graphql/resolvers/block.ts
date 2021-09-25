@@ -24,7 +24,7 @@ export default {
       });
       return block;
     },
-    updateBlock: (
+    updateBlockById: (
       _parent: any,
       args: { id: string; content: object; type: string }
     ) => {
