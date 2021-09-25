@@ -26,7 +26,7 @@ export default {
     },
     updateBlock: (
       _parent: any,
-      args: { content: object; id: string; type: string }
+      args: { id: string; content: object; type: string }
     ) => {
       const block = prisma.block.update({
         where: {
