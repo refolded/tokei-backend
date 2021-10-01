@@ -114,16 +114,29 @@ export default {
       }
     },
     removeUser: async (_parent: any, args: { id: string }) => {
-      const removedUser = await prisma.user.delete({
+      const userExist = await prisma.user.findUnique({
         where: {
-          id: args.id,
+          email: args.id,
         },
         select: {
-          name: true,
           email: true,
+          name: true,
         },
       });
-      return removedUser;
+      if (!userExist) {
+        throw new Error("User Does not exist ");
+      } else {
+        const removedUser = await prisma.user.delete({
+          where: {
+            id: args.id,
+          },
+          select: {
+            name: true,
+            email: true,
+          },
+        });
+        return removedUser;
+      }
     },
   },
 };
