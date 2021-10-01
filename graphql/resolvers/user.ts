@@ -116,7 +116,7 @@ export default {
     removeUser: async (_parent: any, args: { id: string }) => {
       const userExist = await prisma.user.findUnique({
         where: {
-          email: args.id,
+          id: args.id,
         },
         select: {
           email: true,
